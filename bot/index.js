@@ -140,9 +140,17 @@ app.post('/webhook', function(req, res, next) {
 	}
 });
 
-var server = app.listen(process.env.PORT || 8000, function() {
-	// var host = server.address().address;
-	// var port = server.address().port;
+app.get('/pair', function(req, res, next) {
+	const partnerId = req.query.partnerId;
+	const consumerId = req.query.consumerId;
+	
+	conv.start(partnerId, consumerId);
+	
+	console.log(partnerId, consumerId);
+	
+	res.sendStatus(200)
+});
 
+var server = app.listen(process.env.PORT || 8000, function() {
 	console.log(`Smooch Bot listening on port ${process.env.PORT || 8000}`);
 });

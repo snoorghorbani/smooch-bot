@@ -29,6 +29,7 @@ const conv = (function() {
 		return userId in maps;
 	}
 	function sayToParticipant(userId, message) {
+		if (!maps[userId] || !bots[maps[userId]]) return;
 		bots[maps[userId]].say(message).then(() => {}).catch((err) => {
 			debugger;
 		});
@@ -51,7 +52,5 @@ const conv = (function() {
 		sayToParticipant: sayToParticipant
 	};
 })();
-
-conv.start(process.env.partnerId, process.env.consumerId);
 
 module.exports = conv;
